@@ -23,6 +23,9 @@ class ScreenshotRequest {
 
     targetURL: string;
     targetField: string;
+
+    username: string;
+    avatar_url: string;
 }
 
 // from https://stackoverflow.com/a/12300351
@@ -190,6 +193,14 @@ class ScreenshotUI {
         const getFormData = () => {
             const formData = new FormData();
             formData.append(request.targetField, dataURItoBlob(imageURL), `screenshot.${request.encoding}`);
+
+            if (request.username !== undefined) {
+                formData.append('username', request.username);
+            }
+
+            if (request.avatar_url !== undefined) {
+                formData.append('avatar_url', request.avatar_url);
+            }
 
             return formData;
         };
